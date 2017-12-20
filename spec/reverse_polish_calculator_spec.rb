@@ -6,6 +6,11 @@ RSpec.describe ReversePolishCalculator do
   end
 
   it "does something useful" do
-    expect(false).to eq(true)
+    calc = ReversePolishCalculator.new
+    allow(calc).to receive(:start)
+
+    expect(ReversePolishCalculator).to receive(:new).and_return(calc)
+
+    run_file("./bin/console")
   end
 end

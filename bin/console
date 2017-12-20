@@ -1,14 +1,10 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "reverse_polish_calculator"
+require_relative '../config/environment.rb'
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
+puts "Thank goodness! The Polish Calculator comes to the Rescue!"
 
-# (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
+ReversePolishCalculator.new.calculate
 
-require "irb"
-IRB.start(__FILE__)
+
+

@@ -7,11 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "reverse_polish_calculator"
   spec.version       = ReversePolishCalculator::VERSION
   spec.authors       = ["Devan"]
-  spec.email         = ["devan.moylan@backyardlion.com"]
+  spec.email         = ["dmmoylan@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Reverse Polish calculator}
+  spec.homepage      = "https://www.github.com/devanmoylan/reverse_polish_calculator"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
