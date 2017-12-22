@@ -1,10 +1,10 @@
-#Requirements
+# Requirements
 require 'bundler'
 Bundler.require
-require "irb"
+require 'irb'
 require 'pry'
 
-#Libraries
-require_relative "../lib/reverse_polish_calculator.rb"
+# Libraries
+require_relative '../lib/reverse_polish_calculator.rb'
 
-puts "Locked and loaded"
+puts 'Locked and loaded'
