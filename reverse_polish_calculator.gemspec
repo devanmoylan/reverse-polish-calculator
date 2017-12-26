@@ -1,7 +1,7 @@
 
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'reverse_polish_calculator/version'
+require 'reverse_polish_calculator'
 
 Gem::Specification.new do |spec|
   spec.name          = 'reverse_polish_calculator'
@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['dmmoylan@gmail.com']
 
   spec.summary       = 'Reverse Polish calculator'
-  spec.homepage      = 'https://www.github.com/devanmoylan/reverse_polish_calculator'
+  spec.homepage      = 'https://github.com/devanmoylan/reverse-polish-calculator/'
   spec.license       = 'MIT'
 
   if spec.respond_to?(:metadata)

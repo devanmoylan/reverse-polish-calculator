@@ -9,6 +9,7 @@ class ReversePolishCalculator
   # https://en.wikipedia.org/wiki/Reverse_Polish_notation
   # http://www.betterspecs.org/
   # https://ruby-doc.org/core-2.4.2/Object.html
+  # https://www.digitalocean.com/community/tutorials/how-to-package-and-distribute-ruby-applications-as-a-gem-using-rubygems
 
   OPERATORS = ['+', '-', '*', '/'].freeze
   VALID_EXITS = %w[exit q quit].freeze
