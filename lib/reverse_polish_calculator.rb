@@ -1,68 +1,43 @@
+require_relative 'guide.rb'
+
+# Postfix notation
 class ReversePolishCalculator
+  VERSION = '0.1.0'.freeze
+
   ## Resources:
   # http://rubular.com/
   # https://en.wikipedia.org/wiki/Reverse_Polish_notation
+  # http://www.betterspecs.org/
+  # https://ruby-doc.org/core-2.4.2/Object.html
 
   OPERATORS = ['+', '-', '*', '/'].freeze
   VALID_EXITS = %w[exit q quit].freeze
-  EXAMPLES = ['6 2 +', '4 5 +', '4 5 + 3 *', '91 1 +', '8 2 *', '5 5 -', '6 12 -', '2 20 10 - /'].freeze
+  EXAMPLES = ['6 2 +',
+              '4 5 +',
+              '4 5 + 3 *',
+              '91 1 +',
+              '8 2 *',
+              '5 5 -',
+              '6 12 -',
+              '2 20 10 - /'].freeze
 
   attr_accessor :expression, :evaluation
 
-  def initialize
-    @expression = nil
-    @evaluation = []
+  def initialize(expression = nil, evaluation = [])
+    @expression = expression
+    @evaluation = evaluation
   end
 
-  def operation
-    ## TODO: puts the list of commands a user can use.
-    welcome_user
+  include Guide
+
+  def run
+    print_introduction
     evaluate until input_contains_valid_exit
   end
 
   def evaluate
     gather_input
     input_contains_valid_exit ? exit : evaluate_input
-
-    # introduce rules: maybe reference a resource
-    # TODO look up polish cal rules
-    # TODO break everything into separate methods
-    # TODO clean up unused parts / install rubocop
-    # TODO work in exit (q), and clear
-    # TODO write tests
-    # TODO write a read me
-    # TODO create examples
-  end
-
-  def evaluate_input
-    case @expression
-    when 'clear'
-      clear_evaluation
-    when 'example'
-      output_example
-    else
-      evaluate_expression(expression_array)
-    end
-  end
-
-  def clear_evaluation
-    @evaluation.clear
-    puts 'You now have a clean slate.'
-  end
-
-  def output_example
-    @expression = EXAMPLES.sample
-    puts "example input > #{@expression}"
-    evaluate_expression(expression_array)
-    clear_evaluation
-  end
-
-  def input_contains_valid_exit
-    VALID_EXITS.include? @expression
-  end
-
-  def print_result
-    puts "result: #{@evaluation.join.to_i}"
   end
 
   def gather_input
@@ -70,29 +45,47 @@ class ReversePolishCalculator
     @expression = gets.strip.downcase
   end
 
-  def expression_array
-    @expression.split(' ')
+  def input_contains_valid_exit
+    VALID_EXITS.include? @expression
+  end
+
+  def evaluate_input
+    case @expression
+    when 'help'
+      print_operation_guide
+    when 'clear'
+      clear_evaluation
+    when 'example'
+      run_example
+    else
+      evaluate_expression(expression_array)
+    end
+  end
+
+  def clear_evaluation
+    @evaluation.clear
   end
 
   def evaluate_expression(array)
     array.each do |element|
-      if element =~ /^[0-9]*$/
-        # push in floats
+      if element =~ /^[0-9].*$/
         @evaluation.push(element.to_f)
       elsif OPERATORS.include? element
-        # check for appropriate number of intergers
-        raise 'You must have two operands before an operator. Please try again.' if @evaluation.length < 2
+        raise 'You must have two operands before and per operator.' if @evaluation.length < 2
         operands = @evaluation.pop(2)
         @evaluation.push(operands[0].send(element, operands[1]))
       else
-        # handle inputs that are exceptions by raising an error
-        raise "The input of \"#{element}\" is neither a valid integer nor operator. Please input a number 0-9 or one of the following operators: #{OPERATORS} "
+        print_error(element)
       end
     end
     print_result
   end
 
-  def welcome_user
-    puts ''
+  def print_result
+    puts "result: #{@evaluation.last}"
+  end
+
+  def expression_array
+    @expression.split(' ')
   end
 end

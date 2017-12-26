@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'reverse_polish_calculator'
+require_relative '../lib/reverse_polish_calculator.rb'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -11,8 +11,4 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-end
-
-def run_file(file)
-  eval(File.read(file), binding)
 end
